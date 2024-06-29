@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header>
+    <header className="px-6 py-4">
       <div className="flex justify-between items-center">
         <Link href={"/"} className=" font-bold text-xl">
           Job Board
