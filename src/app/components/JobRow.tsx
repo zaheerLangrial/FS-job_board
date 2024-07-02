@@ -1,9 +1,13 @@
 import React from "react";
+import { FaHeart } from "react-icons/fa";
 
 const JobRow = () => {
   return (
     <>
-      <div className="bg-white p-4 flex gap-4 rounded-lg shadow-sm">
+      <div className="bg-white p-4 flex gap-4 rounded-lg shadow-sm relative">
+        <div className="absolute top-2 right-4 w-fit">
+        <FaHeart className="size-4 text-gray-200" />
+        </div>
         <div className=" content-center">
           <img
             className=" size-12"
