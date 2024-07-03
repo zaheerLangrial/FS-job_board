@@ -14,7 +14,10 @@ const Header = async () => {
         </Link>
         <nav className="flex gap-2">
           {!user ? (
-            <Link href={signInUrl} className=" bg-gray-200 py-2 px-4 rounded-md">
+            <Link
+              href={signInUrl}
+              className=" bg-gray-200 py-2 px-4 rounded-md"
+            >
               Log in
             </Link>
           ) : (
@@ -24,13 +27,19 @@ const Header = async () => {
                 await signOut();
               }}
             >
-              <button type="submit" className=" bg-gray-200 py-2 px-4 rounded-md">
+              <button
+                type="submit"
+                className=" bg-gray-200 py-2 px-4 rounded-md"
+              >
                 Log out
               </button>
             </form>
           )}
 
-          <Link href={"/new-listing"} className=" bg-blue-600 text-white py-2 px-4 rounded-md">
+          <Link
+            href={"/new-listing"}
+            className=" bg-blue-600 text-white py-2 px-4 rounded-md"
+          >
             Post a job
           </Link>
         </nav>

@@ -46,18 +46,16 @@ const NewListingPage = async () => {
           Select a company to create a job add for
         </p>
         <ul className="flex flex-col gap-2">
-        {
-            
-            Object.keys(organizationsNames).map(orgId => (
-                <Link href={'/new-listing/'+orgId} className="border flex items-center gap-2 w-fit py-2 px-4">
-                    {organizationsNames?.[orgId]} <FaArrowRight />
-                </Link>
-            ))
-        }
-
+          {Object.keys(organizationsNames).map((orgId) => (
+            <Link
+              href={"/new-listing/" + orgId}
+              className="border flex items-center gap-2 w-fit py-2 px-4"
+            >
+              {organizationsNames?.[orgId]} <FaArrowRight />
+            </Link>
+          ))}
         </ul>
 
-        
         {organizationMemberShips.data.length === 0 && (
           <div className="border border-blue-200 bg-blue-50 p-4 rounded-md">
             No companies found assigned to your user

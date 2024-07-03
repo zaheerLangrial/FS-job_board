@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 const NewCompanyPage = async () => {
-    const { user } = await getUser();
+  const { user } = await getUser();
   return (
     <div className="px-6">
       <h2 className=" text-lg mt-6">Create a new company</h2>

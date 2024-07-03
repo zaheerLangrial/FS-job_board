@@ -5,10 +5,9 @@ import {
   getSignUpUrl,
   getUser,
   signOut,
-} from '@workos-inc/authkit-nextjs';
+} from "@workos-inc/authkit-nextjs";
 
 export default async function Home() {
-
   const { user } = await getUser();
 
   // Get the URL to redirect the user to AuthKit to sign in
@@ -18,9 +17,9 @@ export default async function Home() {
   const signUpUrl = await getSignUpUrl();
 
   return (
-   <>
-    <Hero />
-    <Jobs />
-   </>
+    <>
+      <Hero />
+      <Jobs />
+    </>
   );
 }
