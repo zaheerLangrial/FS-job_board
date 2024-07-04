@@ -1,7 +1,7 @@
 import React from "react";
 import { createCompany } from "../actions/workosActions";
 import { getUser } from "@workos-inc/authkit-nextjs";
-import RedirectButton from "../components/RedirectButton";
+import { FaArrowRight } from "react-icons/fa";
 
 const NewCompanyPage = async () => {
   const { user } = await getUser();
@@ -24,7 +24,9 @@ const NewCompanyPage = async () => {
           type="text"
           className=" p-2 border border-gray-400 rounded-md"
         />
-        <RedirectButton />
+        <button className=" flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-md">
+          Create company <FaArrowRight />
+        </button>
       </form>
     </div>
   );
