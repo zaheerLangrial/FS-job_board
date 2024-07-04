@@ -3,7 +3,7 @@ import { jobModel } from "@/models/Job";
 import mongoose from "mongoose";
 
 export type typeJobData = {
-  _id?: 'string';
+  _id?: "string";
   jobTitle: string;
   remote: string;
   type: string;
@@ -19,12 +19,11 @@ export type typeJobData = {
   phone: string;
   stateName: string;
   createdAt?: string;
-  admin?: boolean
-  upDateJobId? : string
+  admin?: boolean;
+  upDateJobId?: string;
 };
 
 export const SaveJobAction = async (data: typeJobData) => {
-  console.log("Data in SaveJobAction", data);
   try {
     await mongoose.connect(process.env.MONGODB_URI as string, {
       serverSelectionTimeoutMS: 5000,
@@ -33,6 +32,8 @@ export const SaveJobAction = async (data: typeJobData) => {
   } catch (error) {
     console.log("DataBase not Connected:", error);
   }
-  const jobDoc = !!data.upDateJobId ? await jobModel.findByIdAndUpdate(data.upDateJobId , data) : await jobModel.create(data);
+  const jobDoc = !!data.upDateJobId
+    ? await jobModel.findByIdAndUpdate(data.upDateJobId, data)
+    : await jobModel.create(data);
   return JSON.parse(JSON.stringify(jobDoc));
 };

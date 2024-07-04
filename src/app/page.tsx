@@ -18,8 +18,8 @@ export default async function Home() {
   // Get the URL to redirect the user to AuthKit to sign up
   const signUpUrl = await getSignUpUrl();
 
-  await mongoose.connect(process.env.MONGODB_URI as string)
-  const jobs = await jobModel.find()
+  await mongoose.connect(process.env.MONGODB_URI as string);
+  const jobs = await jobModel.find();
   return (
     <>
       <Hero />

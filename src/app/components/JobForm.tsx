@@ -25,15 +25,23 @@ type IProps = {
   orgId?: string;
 };
 
-const JobForm = ({ job , orgId }: IProps) => {
+const JobForm = ({ job, orgId }: IProps) => {
   const [countryid, setCountryid] = useState(0);
   const [stateid, setstateid] = useState(0);
   const [, setcityid] = useState(0);
-  const [countryName, setCountryName] = useState(job?.countryName ? job?.countryName : "");
-  const [stateName, setStateName] = useState(job?.stateName ? job?.stateName : "");
+  const [countryName, setCountryName] = useState(
+    job?.countryName ? job?.countryName : ""
+  );
+  const [stateName, setStateName] = useState(
+    job?.stateName ? job?.stateName : ""
+  );
   const [cityName, setCityName] = useState(job?.cityName ? job?.cityName : "");
-  const [personImage, setPersonImage] = useState(!!job?.personImage ? job?.personImage : "");
-  const [iconImage, setIconImage] = useState(!!job?.iconImage ? job?.iconImage : "");
+  const [personImage, setPersonImage] = useState(
+    !!job?.personImage ? job?.personImage : ""
+  );
+  const [iconImage, setIconImage] = useState(
+    !!job?.iconImage ? job?.iconImage : ""
+  );
   const router = useRouter();
 
   const saveJob = async (event: FormEvent<HTMLFormElement>) => {
@@ -47,7 +55,7 @@ const JobForm = ({ job , orgId }: IProps) => {
       personImage,
       iconImage,
       orgId,
-      upDateJobId: job?._id ? job?._id : ''
+      upDateJobId: job?._id ? job?._id : "",
     };
     const jobDoc = await SaveJobAction(jobData as typeJobData);
     router.push("/jobs/" + jobDoc.orgId);
@@ -129,22 +137,36 @@ const JobForm = ({ job , orgId }: IProps) => {
             <h3>Contact Person</h3>
             <div className="flex gap-4">
               <div>
-                <ImageUploader setImage={setPersonImage} image={personImage}  />
+                <ImageUploader setImage={setPersonImage} image={personImage} />
               </div>
               <div className="flex flex-col gap-1 grow">
-                <TextField.Root placeholder="John Doe" name="name" defaultValue={job?.name}>
+                <TextField.Root
+                  placeholder="John Doe"
+                  name="name"
+                  defaultValue={job?.name}
+                >
                   <TextField.Slot>
                     <BiUser />
                   </TextField.Slot>
                 </TextField.Root>
 
-                <TextField.Root placeholder="Phone" type="tel" name="phone" defaultValue={job?.phone}>
+                <TextField.Root
+                  placeholder="Phone"
+                  type="tel"
+                  name="phone"
+                  defaultValue={job?.phone}
+                >
                   <TextField.Slot>
                     <FaPhone />
                   </TextField.Slot>
                 </TextField.Root>
 
-                <TextField.Root placeholder="Email" type="email" name="email" defaultValue={job?.email}>
+                <TextField.Root
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  defaultValue={job?.email}
+                >
                   <TextField.Slot>
                     <FaEnvelope />
                   </TextField.Slot>

@@ -14,9 +14,13 @@ const Jobs = ({ header, jobs, companyName }: IProps) => {
       <div className=" container mx-auto">
         <h2 className=" font-bold mb-4">{header}</h2>
         <div className="flex flex-col-reverse gap-4">
-          {jobs?.map((job) => {
+          {jobs?.map((job, i) => {
             return (
-              <JobRow job={job as typeJobData} companyName={companyName} />
+              <JobRow
+                key={job.orgId + i}
+                job={job as typeJobData}
+                companyName={companyName}
+              />
             );
           })}
         </div>

@@ -2,11 +2,9 @@
 import TimeAgo from "react-timeago";
 
 type IProps = {
-    createdAt : string
-}
+  createdAt: string;
+};
 
-export const ReactTimeAgo = ({createdAt}: IProps) => {
-    return (
-        <TimeAgo date={createdAt || "--"} />
-    )
-}
+export const ReactTimeAgo = ({ createdAt }: IProps) => {
+  return <TimeAgo date={createdAt || "--"} />;
+};

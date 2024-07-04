@@ -36,7 +36,10 @@ const JobRow = async ({ job, companyName }: IProps) => {
           <div className="text-sm text-gray-400 capitalize">
             {job?.remote || "--"} &middot; {job?.cityName || "--"},{" "}
             {job?.countryName || "--"} &middot; {job?.type || "--"} &middot;
-            {job?.admin && <Link href={'/jobs/edit/'+job._id}>Edit</Link>} &middot;
+            {job?.admin && (
+              <Link href={"/jobs/edit/" + job._id}>Edit</Link>
+            )}{" "}
+            &middot;
             {job?.admin && <DeleteButton jobId={job?._id as string} />}
           </div>
         </div>

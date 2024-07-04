@@ -1,7 +1,6 @@
 import app from "@/firebase";
 import { Button } from "@radix-ui/themes";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import Image from "next/image";
 import React, { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import { FaUpload } from "react-icons/fa";
 

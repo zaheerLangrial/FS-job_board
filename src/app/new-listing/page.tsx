@@ -45,8 +45,9 @@ const NewListingPage = async () => {
           Select a company to create a job add for
         </p>
         <ul className="flex flex-col gap-2">
-          {Object.keys(organizationsNames).map((orgId) => (
+          {Object.keys(organizationsNames).map((orgId, i) => (
             <Link
+              key={i}
               href={"/new-listing/" + orgId}
               className="border flex items-center gap-2 w-fit py-2 px-4"
             >

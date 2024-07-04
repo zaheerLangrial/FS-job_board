@@ -12,15 +12,15 @@ type IProps = {
 
 const jobEditPage = async ({ params }: IProps) => {
   const jobId = params.jobId;
-  const {user} = await getUser()
-  if(!user) {
-    return "Please Login..."
+  const { user } = await getUser();
+  if (!user) {
+    return "Please Login...";
   }
-  await mongoose.connect(process.env.MONGODB_URI as string)
-  const job = JSON.parse(JSON.stringify(await jobModel.findById(jobId)))
+  await mongoose.connect(process.env.MONGODB_URI as string);
+  const job = JSON.parse(JSON.stringify(await jobModel.findById(jobId)));
   return (
     <>
-      <JobForm job={job} orgId={job.orgId}  />
+      <JobForm job={job} orgId={job.orgId} />
     </>
   );
 };

@@ -2,7 +2,6 @@ import JobForm from "@/app/components/JobForm";
 import { getUser } from "@workos-inc/authkit-nextjs";
 import { WorkOS } from "@workos-inc/node";
 
-
 export type IProps = {
   params: {
     orgId: string;
@@ -24,9 +23,7 @@ const JobListingOrgIdPage = async ({ params }: IProps) => {
   if (!hasAccess) {
     return "No Access";
   }
-  return (
-    <JobForm orgId={orgId} />
-  );
+  return <JobForm orgId={orgId} />;
 };
 
 export default JobListingOrgIdPage;
