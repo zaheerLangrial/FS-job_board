@@ -1,9 +1,7 @@
 import React from "react";
 import { createCompany } from "../actions/workosActions";
 import { getUser } from "@workos-inc/authkit-nextjs";
-import { FaArrowRight } from "react-icons/fa";
-import { redirect } from "next/navigation";
-import Link from "next/link";
+import RedirectButton from "../components/RedirectButton";
 
 const NewCompanyPage = async () => {
   const { user } = await getUser();
@@ -17,7 +15,7 @@ const NewCompanyPage = async () => {
         action={async (data) => {
           "use server";
           const companyName = data?.get("newCompanyName");
-          createCompany(companyName as string, user?.id as string);
+          await createCompany(companyName as string, user?.id as string);
         }}
         className="flex gap-2"
       >
@@ -26,9 +24,7 @@ const NewCompanyPage = async () => {
           type="text"
           className=" p-2 border border-gray-400 rounded-md"
         />
-        <button className=" flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-md">
-          Create company <FaArrowRight />
-        </button>
+        <RedirectButton />
       </form>
     </div>
   );
