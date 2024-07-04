@@ -21,21 +21,26 @@ import { redirect, useParams } from "next/navigation";
 import { SaveJobAction, typeJobData } from "../actions/jobAction";
 import { useRouter } from "next/navigation";
 
-const JobForm = () => {
-  let { orgId } = useParams();
+type IProps = {
+  job?: typeJobData;
+  orgId?: string;
+};
+
+const JobForm = ({ job , orgId }: IProps) => {
   const [countryid, setCountryid] = useState(0);
   const [stateid, setstateid] = useState(0);
   const [, setcityid] = useState(0);
-  const [countryName, setCountryName] = useState("");
-  const [stateName, setStateName] = useState("");
-  const [cityName, setCityName] = useState("");
-  const [personImage, setPersonImage] = useState("");
-  const [iconImage, setIconImage] = useState("");
-  const router = useRouter()
+  const [countryName, setCountryName] = useState(job?.countryName ? job?.countryName : "");
+  const [stateName, setStateName] = useState(job?.stateName ? job?.stateName : "");
+  const [cityName, setCityName] = useState(job?.cityName ? job?.cityName : "");
+  const [personImage, setPersonImage] = useState(!!job?.personImage ? job?.personImage : "");
+  const [iconImage, setIconImage] = useState(!!job?.iconImage ? job?.iconImage : "");
+  const router = useRouter();
 
   const saveJob = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event?.target as HTMLFormElement);
+    console.log('Data ===>', data)
     const jobData = {
       ...Object.fromEntries(data.entries()),
       countryName,
@@ -44,18 +49,32 @@ const JobForm = () => {
       personImage,
       iconImage,
       orgId,
+      upDateJobId: job?._id ? job?._id : ''
     };
-   const jobDoc = await SaveJobAction(jobData as typeJobData)
-   router.push('/jobs/'+jobDoc.orgId)
+    console.log('jobData ====>' , jobData)
+    const jobDoc = await SaveJobAction(jobData as typeJobData);
+    router.push("/jobs/" + jobDoc.orgId);
   };
   return (
     <Theme className="max-w-5xl mx-auto">
+      <pre>
+        {
+          JSON.stringify(job, null , 2)
+        }
+      </pre>
       <form onSubmit={saveJob} className="mt-6 px-6 flex flex-col gap-4">
-        <TextField.Root placeholder="Job title" name="jobTitle" />
+        <TextField.Root
+          placeholder="Job title"
+          name="jobTitle"
+          defaultValue={job?.jobTitle}
+        />
         <div className="grid grid-cols-3 *:grow">
           <div>
             Remote?
-            <RadioGroup.Root defaultValue="hybrid" name="remote">
+            <RadioGroup.Root
+              defaultValue={job?.remote ? job?.remote : "hybrid"}
+              name="remote"
+            >
               <RadioGroup.Item value="onsite">On-site</RadioGroup.Item>
               <RadioGroup.Item value="hybrid">Hybrid-remote</RadioGroup.Item>
               <RadioGroup.Item value="remote">Fully remote</RadioGroup.Item>
@@ -63,7 +82,10 @@ const JobForm = () => {
           </div>
           <div>
             Full time?
-            <RadioGroup.Root defaultValue="full" name="type">
+            <RadioGroup.Root
+              defaultValue={job?.type ? job?.type : "full"}
+              name="type"
+            >
               <RadioGroup.Item value="project">Project</RadioGroup.Item>
               <RadioGroup.Item value="part">Part-time</RadioGroup.Item>
               <RadioGroup.Item value="full">Full-time</RadioGroup.Item>
@@ -71,7 +93,7 @@ const JobForm = () => {
           </div>
           <div>
             Salary
-            <TextField.Root name="salary">
+            <TextField.Root name="salary" defaultValue={job?.salary}>
               <TextField.Slot>$</TextField.Slot>
               <TextField.Slot>k/year</TextField.Slot>
             </TextField.Root>
@@ -109,28 +131,28 @@ const JobForm = () => {
         <div className="flex">
           <div className="w-1/3">
             <h3>Job Icon</h3>
-            <ImageUploader setImage={setIconImage} />
+            <ImageUploader setImage={setIconImage} image={iconImage} />
           </div>
           <div className="grow">
             <h3>Contact Person</h3>
             <div className="flex gap-4">
               <div>
-                <ImageUploader setImage={setPersonImage} />
+                <ImageUploader setImage={setPersonImage} image={personImage}  />
               </div>
               <div className="flex flex-col gap-1 grow">
-                <TextField.Root placeholder="John Doe" name="name">
+                <TextField.Root placeholder="John Doe" name="name" defaultValue={job?.name}>
                   <TextField.Slot>
                     <BiUser />
                   </TextField.Slot>
                 </TextField.Root>
 
-                <TextField.Root placeholder="Phone" type="tel" name="phone">
+                <TextField.Root placeholder="Phone" type="tel" name="phone" defaultValue={job?.phone}>
                   <TextField.Slot>
                     <FaPhone />
                   </TextField.Slot>
                 </TextField.Root>
 
-                <TextField.Root placeholder="Email" type="email" name="email">
+                <TextField.Root placeholder="Email" type="email" name="email" defaultValue={job?.email}>
                   <TextField.Slot>
                     <FaEnvelope />
                   </TextField.Slot>
@@ -140,6 +162,7 @@ const JobForm = () => {
           </div>
         </div>
         <TextArea
+          defaultValue={job?.description}
           resize="vertical"
           placeholder="Job description"
           name="description"

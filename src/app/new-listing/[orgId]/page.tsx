@@ -25,7 +25,7 @@ const JobListingOrgIdPage = async ({ params }: IProps) => {
     return "No Access";
   }
   return (
-    <JobForm />
+    <JobForm orgId={orgId} />
   );
 };
 

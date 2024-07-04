@@ -1,14 +1,16 @@
 import app from "@/firebase";
 import { Button } from "@radix-ui/themes";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image";
 import React, { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import { FaUpload } from "react-icons/fa";
 
 type IProps = {
-    setImage: Dispatch<SetStateAction<string>>
+    setImage: Dispatch<SetStateAction<string>>;
+    image: string;
 }
 
-const ImageUploader = ({setImage}: IProps) => {
+const ImageUploader = ({setImage , image}: IProps) => {
   const fileInRef = useRef<HTMLInputElement>(null);
 
   const upload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +31,13 @@ const ImageUploader = ({setImage}: IProps) => {
   return (
     <>
       <div className="bg-gray-100 rounded-md size-24 inline-flex items-center  justify-center">
-        <FaUpload size={24} className="text-gray-400" />
+        {
+          !!image ? (
+            <img src={image} alt="Image" />
+          ) : (
+            <FaUpload size={24} className="text-gray-400" />
+          )
+        }
       </div>
       <div className="mt-2">
         <input

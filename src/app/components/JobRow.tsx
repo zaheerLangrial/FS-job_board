@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaHeart } from "react-icons/fa";
-import { typeJobData } from "../actions/jobAction";
+import type { typeJobData } from "../actions/jobAction";
 import { ReactTimeAgo } from "./ReactTimeAgo";
-import { getUser } from "@workos-inc/authkit-nextjs";
-import { Button } from "@radix-ui/themes";
+import Link from "next/link";
 
 type IProps = {
   job: typeJobData;
   companyName?: string;
 };
 const JobRow = async ({ job, companyName }: IProps) => {
-  const { user } = await getUser();
   return (
     <>
       <div className="bg-white p-4 flex gap-4 rounded-lg shadow-sm relative">
@@ -36,13 +34,9 @@ const JobRow = async ({ job, companyName }: IProps) => {
           </div>
           <div className="text-sm text-gray-400 capitalize">
             {job?.remote || "--"} &middot; {job?.cityName || "--"},{" "}
-            {job?.countryName || "--"} &middot; {job?.type || "--"}
-            {user && (
-              <button>Edit</button>
-            )} &middot; 
-            {user && (
-              <button>Delete</button>
-            )}
+            {job?.countryName || "--"} &middot; {job?.type || "--"} &middot;
+            {job?.admin && <Link href={'/jobs/edit/'+job._id}>Edit</Link>} &middot;
+            {job?.admin && <button>Delete</button>}
           </div>
         </div>
         <div className="content-end text-sm text-gray-400">

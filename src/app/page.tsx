@@ -5,7 +5,6 @@ import {
   getSignInUrl,
   getSignUpUrl,
   getUser,
-  signOut,
 } from "@workos-inc/authkit-nextjs";
 import mongoose from "mongoose";
 import { jobModel } from "@/models/Job";
