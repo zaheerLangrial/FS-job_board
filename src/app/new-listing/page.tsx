@@ -39,7 +39,6 @@ const NewListingPage = async () => {
 
   return (
     <div className="px-6">
-      {/* <pre>{JSON.stringify(organizationMemberShips, null, 2)}</pre> */}
       <div>
         <h2 className="text-lg mt-6">Your companies</h2>
         <p className="text-gray-500 text-sm mb-2">

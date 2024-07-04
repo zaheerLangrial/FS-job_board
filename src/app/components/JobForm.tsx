@@ -17,7 +17,6 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import { BiUser } from "react-icons/bi";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import ImageUploader from "./ImageUploader";
-import { redirect, useParams } from "next/navigation";
 import { SaveJobAction, typeJobData } from "../actions/jobAction";
 import { useRouter } from "next/navigation";
 
@@ -40,7 +39,6 @@ const JobForm = ({ job , orgId }: IProps) => {
   const saveJob = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event?.target as HTMLFormElement);
-    console.log('Data ===>', data)
     const jobData = {
       ...Object.fromEntries(data.entries()),
       countryName,
@@ -51,17 +49,11 @@ const JobForm = ({ job , orgId }: IProps) => {
       orgId,
       upDateJobId: job?._id ? job?._id : ''
     };
-    console.log('jobData ====>' , jobData)
     const jobDoc = await SaveJobAction(jobData as typeJobData);
     router.push("/jobs/" + jobDoc.orgId);
   };
   return (
     <Theme className="max-w-5xl mx-auto">
-      <pre>
-        {
-          JSON.stringify(job, null , 2)
-        }
-      </pre>
       <form onSubmit={saveJob} className="mt-6 px-6 flex flex-col gap-4">
         <TextField.Root
           placeholder="Job title"

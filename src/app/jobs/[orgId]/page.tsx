@@ -38,9 +38,6 @@ const CompanyJobs = async ({ params }: IProps) => {
   }
   return (
     <div className="px-6">
-       <pre>{JSON.stringify(jobs, null, 2)}</pre>
-       <hr />
-      <pre>{JSON.stringify(oms, null, 2)}</pre>
       <Jobs
         header={"Jobs posted by " + org.name}
         jobs={jobs}

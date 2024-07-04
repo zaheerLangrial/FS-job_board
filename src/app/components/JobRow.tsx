@@ -3,6 +3,7 @@ import { FaHeart } from "react-icons/fa";
 import type { typeJobData } from "../actions/jobAction";
 import { ReactTimeAgo } from "./ReactTimeAgo";
 import Link from "next/link";
+import DeleteButton from "./DeleteButton";
 
 type IProps = {
   job: typeJobData;
@@ -36,7 +37,7 @@ const JobRow = async ({ job, companyName }: IProps) => {
             {job?.remote || "--"} &middot; {job?.cityName || "--"},{" "}
             {job?.countryName || "--"} &middot; {job?.type || "--"} &middot;
             {job?.admin && <Link href={'/jobs/edit/'+job._id}>Edit</Link>} &middot;
-            {job?.admin && <button>Delete</button>}
+            {job?.admin && <DeleteButton jobId={job?._id as string} />}
           </div>
         </div>
         <div className="content-end text-sm text-gray-400">
