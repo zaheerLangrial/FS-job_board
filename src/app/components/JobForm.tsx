@@ -17,8 +17,12 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import { BiUser } from "react-icons/bi";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import ImageUploader from "./ImageUploader";
+import { redirect, useParams } from "next/navigation";
+import { SaveJobAction, typeJobData } from "../actions/jobAction";
+import { useRouter } from "next/navigation";
 
 const JobForm = () => {
+  let { orgId } = useParams();
   const [countryid, setCountryid] = useState(0);
   const [stateid, setstateid] = useState(0);
   const [, setcityid] = useState(0);
@@ -27,8 +31,9 @@ const JobForm = () => {
   const [cityName, setCityName] = useState("");
   const [personImage, setPersonImage] = useState("");
   const [iconImage, setIconImage] = useState("");
+  const router = useRouter()
 
-  const saveJob = (event: FormEvent<HTMLFormElement>) => {
+  const saveJob = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event?.target as HTMLFormElement);
     const jobData = {
@@ -38,7 +43,10 @@ const JobForm = () => {
       cityName,
       personImage,
       iconImage,
+      orgId,
     };
+   const jobDoc = await SaveJobAction(jobData as typeJobData)
+   router.push('/jobs/'+jobDoc.orgId)
   };
   return (
     <Theme className="max-w-5xl mx-auto">
